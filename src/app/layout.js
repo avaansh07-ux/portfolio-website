@@ -19,9 +19,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <nav className="flex items-center justify-between px-8 py-4 border-b">
+          <ul className="flex gap-6 text-sm">
+            <li><a href="/" className="hover:opacity-60">Home</a></li>
+            <li><a href="/projects" className="hover:opacity-60">Projects</a></li>
+            <li><a href="/about" className="hover:opacity-60">About</a></li>
+            <li><a href="/contact" className="hover:opacity-60">Contact</a></li>
+          </ul>
+        </nav>
+
         {children}
       </body>
     </html>
