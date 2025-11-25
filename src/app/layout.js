@@ -27,9 +27,8 @@ export default function RootLayout({ children }) {
           <ul className="flex gap-8 text-sm text-white/70">
             {[
               { href: "/", label: "Home" },
-              { href: "/projects", label: "Projects" },
               { href: "/about", label: "About" },
-              { href: "/contact", label: "Contact" },
+              { href: "/projects", label: "Projects" },
             ].map((item) => (
               <li key={item.href}>
                 <a
