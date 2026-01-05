@@ -41,11 +41,11 @@ export default function Projects() {
 
       {/* ------------------- PROJECT: Credit Risk Loaner ------------------- */}
       <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl">
-        <h2 className="text-2xl font-bold mb-2">Credit Risk Loaner</h2>
+        <h2 className="text-2xl font-bold mb-2">Credit Default Analyzer</h2>
 
         <p className="text-gray-300 mb-4">
           Machine-learning system that analyzes loan performance using structured
-          financial data, predicting risk categories and expected repayment strength.
+          financial data, predicting risk categories and computes default probability.
         </p>
 
         <p className="font-semibold text-gray-200 mb-2">Tech Stack:</p>
