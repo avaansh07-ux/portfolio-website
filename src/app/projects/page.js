@@ -51,7 +51,7 @@ export default function Projects() {
         <p className="font-semibold text-gray-200 mb-2">Tech Stack:</p>
 
         <div className="flex flex-wrap gap-2 mb-4">
-          {["Python", "Pandas", "NumPy", "XGBoost", "Scikit-Learn"].map((tech) => (
+          {["Python", "Pandas", "NumPy", "XGBoost", "Scikit-Learn", "Matplotlib"].map((tech) => (
             <span
               key={tech}
               className="px-3 py-1 bg-white/10 border border-white/20 rounded-full text-sm"
@@ -62,7 +62,39 @@ export default function Projects() {
         </div>
 
         <a
-          href="https://github.com/neilhaoyuan/credit_risk_loaner"
+          href="https://github.com/avaansh07-ux/credit_risk_loaner"
+          target="_blank"
+          className="inline-flex items-center gap-2 hover:opacity-80"
+        >
+          <Image src="/projects/github.png" width={22} height={22} alt="GitHub" />
+          GitHub
+        </a>
+      </div>
+
+      {/* ------------------- PROJECT: PayWise ------------------- */}
+      <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl">
+        <h2 className="text-2xl font-bold mb-2">PayWise</h2>
+
+        <p className="text-gray-300 mb-4">
+          Machine-learning system that analyzes loan performance using structured
+          financial data, predicting risk categories and computes default probability.
+        </p>
+
+        <p className="font-semibold text-gray-200 mb-2">Tech Stack:</p>
+
+        <div className="flex flex-wrap gap-2 mb-4">
+          {["Python", "JavaScript", "CSS", "Flask", "MongoDB", "Chart.js"].map((tech) => (
+            <span
+              key={tech}
+              className="px-3 py-1 bg-white/10 border border-white/20 rounded-full text-sm"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        <a
+          href="https://github.com/avaansh07-ux/credit_risk_loaner"
           target="_blank"
           className="inline-flex items-center gap-2 hover:opacity-80"
         >
@@ -102,7 +134,6 @@ export default function Projects() {
           GitHub
         </a>
       </div>
-
     </main>
   );
 }
