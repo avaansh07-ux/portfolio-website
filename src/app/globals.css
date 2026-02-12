@@ -1,56 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap');
 @import "tailwindcss";
 
-/* Light/dark tokens */
+/* FONT */
+.pirate {
+  font-family: 'UnifrakturCook', serif;
+  letter-spacing: 1px;
+}
+
+/* BASE */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #020617;
+  --foreground: #ededed;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #020617;
-    --foreground: #ededed;
-  }
-}
-
-/* Base body styling */
 body {
-  background: radial-gradient(circle at top, #020617 0%, #020617 40%, #020617 100%);
+  background: #020617;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
-/* Soft float animation for the avatar */
-@keyframes floatSlow {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+/* ================= CLOUD SYSTEM ================= */
+
+.cloud {
+  position: absolute;
+  width: 55vw;
+  height: 40vh;
+  background: url("/map/cloud.png") no-repeat center;
+  background-size: contain;
+  pointer-events: none;
+  mix-blend-mode: screen;
 }
 
-.float-slow {
-  animation: floatSlow 6s ease-in-out infinite;
+/* DRIFT */
+@keyframes driftLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(120vw); }
 }
 
-/* Helper pill style for tech stack tags */
-.tech-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.35rem 0.9rem;
-  border-radius: 9999px;
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(148, 163, 184, 0.6);
-  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.8);
+@keyframes driftRight {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-120vw); }
 }
 
-/* Radial helper for hero glow */
-.bg-radial {
-  background: radial-gradient(circle, rgba(248, 250, 252, 0.12), transparent 65%);
+/* FAR */
+.cloud-far-left {
+  top: 12%;
+  left: -45vw;
+  opacity: 0.16;
+  animation: driftLeft 240s linear infinite;
+  animation-delay: -60s;
 }
 
+.cloud-far-right {
+  top: 18%;
+  right: -45vw;
+  opacity: 0.16;
+  animation: driftRight 260s linear infinite;
+  animation-delay: -120s;
+}
+
+/* MID */
+.cloud-mid-left {
+  top: 45%;
+  left: -40vw;
+  opacity: 0.26;
+  animation: driftLeft 180s linear infinite;
+  animation-delay: -40s;
+}
+
+.cloud-mid-right {
+  top: 55%;
+  right: -40vw;
+  opacity: 0.26;
+  animation: driftRight 195s linear infinite;
+  animation-delay: -95s;
+}
+
+/* CLOSE */
+.cloud-close-left {
+  top: 72%;
+  left: -35vw;
+  opacity: 0.38;
+  filter: blur(1.5px);
+  animation: driftLeft 130s linear infinite;
+  animation-delay: -20s;
+}
+
+.cloud-close-right {
+  top: 80%;
+  right: -35vw;
+  opacity: 0.38;
+  filter: blur(1.5px);
+  animation: driftRight 140s linear infinite;
+  animation-delay: -70s;
+}
