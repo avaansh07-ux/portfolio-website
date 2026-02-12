@@ -5,130 +5,91 @@ import About from "./about/page";
 import Projects from "./projects/page";
 
 export default function Home() {
-  const audioRef = useRef(null);
-  const [playing, setPlaying] = useState(false);
   const [active, setActive] = useState(null);
-  const [cloudOffsets, setCloudOffsets] = useState([]);
+  const [shipPos, setShipPos] = useState({ top: "65%", left: "20%" });
+  const [showSkull, setShowSkull] = useState(true);
 
-  /* ---------- RANDOM CLOUD X POSITIONS (CLIENT ONLY) ---------- */
+  /* Hide skull when opening sections */
   useEffect(() => {
-    const offsets = Array.from({ length: 6 }, () => Math.random() * 60 - 30);
-    setCloudOffsets(offsets);
-  }, []);
+    if (active) setShowSkull(false);
+    else setShowSkull(true);
+  }, [active]);
 
-  /* ---------- TRY AUTOPLAY ---------- */
-  useEffect(() => {
-    const tryPlay = async () => {
-      if (!audioRef.current) return;
-      try {
-        await audioRef.current.play();
-        setPlaying(true);
-      } catch {}
-    };
-    tryPlay();
-  }, []);
-
-  const toggleMusic = async () => {
-    if (!audioRef.current) return;
-    try {
-      if (audioRef.current.paused) {
-        await audioRef.current.play();
-        setPlaying(true);
-      } else {
-        audioRef.current.pause();
-        setPlaying(false);
-      }
-    } catch {}
+  const moveShip = (top, left, section) => {
+    setShipPos({ top, left });
+    setActive(section);
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-black text-white">
-
-      {/* AUDIO */}
-      <audio ref={audioRef} loop preload="auto">
-        <source src="/audio/theme.mp3" type="audio/mpeg" />
-      </audio>
+    <div className="relative w-full h-screen overflow-hidden">
 
       {/* MAP */}
       <img
         src="/map/world.jpg"
-        className="absolute inset-0 w-full h-full object-cover opacity-70"
+        className="absolute inset-0 w-full h-full object-cover map-breath"
       />
 
-      {/* CLOUDS (randomized X) */}
-      {cloudOffsets.length === 6 && (
+      {/* DOTTED PATH */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none">
+        <line x1="20%" y1="65%" x2="40%" y2="55%" className="path-line" />
+        <line x1="40%" y1="55%" x2="55%" y2="75%" className="path-line" />
+        <line x1="55%" y1="75%" x2="70%" y2="48%" className="path-line" />
+        <line x1="70%" y1="48%" x2="85%" y2="60%" className="path-line" />
+      </svg>
+
+      {/* SHIP */}
+      {!active && (
+        <img
+          src="/icons/ship.png"
+          className="ship"
+          style={{ top: shipPos.top, left: shipPos.left }}
+        />
+      )}
+
+      {/* SKULL + CRACKS (ONLY MAIN MAP) */}
+      {!active && showSkull && (
         <>
-          <div className="cloud cloud-far-left"  style={{ transform: `translateX(${cloudOffsets[0]}vw)` }} />
-          <div className="cloud cloud-far-right" style={{ transform: `translateX(${cloudOffsets[1]}vw)` }} />
-
-          <div className="cloud cloud-mid-left"  style={{ transform: `translateX(${cloudOffsets[2]}vw)` }} />
-          <div className="cloud cloud-mid-right" style={{ transform: `translateX(${cloudOffsets[3]}vw)` }} />
-
-          <div className="cloud cloud-close-left"  style={{ transform: `translateX(${cloudOffsets[4]}vw)` }} />
-          <div className="cloud cloud-close-right" style={{ transform: `translateX(${cloudOffsets[5]}vw)` }} />
+          <img src="/icons/skull.png" className="skull" />
+          <img src="/icons/cracks.png" className="cracks" />
         </>
       )}
 
-      {/* DARK OVERLAY */}
-      <div className="absolute inset-0 bg-black/40" />
-
       {/* TITLE */}
-      <div className="absolute top-24 left-1/2 -translate-x-1/2 text-center">
-        <h1 className="pirate text-5xl sm:text-6xl mb-2">
-          The Avaansh Atlas
-        </h1>
-      </div>
+      {!active && (
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 text-center z-10">
+          <h1 className="pirate text-5xl sm:text-6xl">The Avaansh Atlas</h1>
+        </div>
+      )}
 
-      {/* MAP STOPS */}
-      <MapStop label="About" style={{ top: "65%", left: "20%" }} onClick={() => setActive("about")} />
-      <MapStop label="Projects" style={{ top: "55%", left: "40%" }} onClick={() => setActive("projects")} />
-      <MapStop label="Skills" style={{ top: "48%", left: "70%" }} onClick={() => setActive("skills")} />
-      <MapStop label="Experience" style={{ top: "75%", left: "55%" }} onClick={() => setActive("experience")} />
-      <MapStop label="Contact" style={{ top: "60%", left: "85%" }} onClick={() => setActive("contact")} />
-
-      {/* MUSIC BUTTON */}
-      <button
-        onClick={toggleMusic}
-        className="absolute bottom-6 right-6 z-40 rounded-full bg-black/60 border border-white/20 px-4 py-2 text-sm backdrop-blur-md hover:bg-black/80 transition"
-      >
-        {playing ? "Pause Music" : "Play Music"}
-      </button>
+      {/* MAP POINTS */}
+      {!active && (
+        <>
+          <MapStop label="About" top="65%" left="20%" onClick={() => moveShip("65%", "20%", "about")} />
+          <MapStop label="Projects" top="55%" left="40%" onClick={() => moveShip("55%", "40%", "projects")} />
+          <MapStop label="Experience" top="75%" left="55%" onClick={() => moveShip("75%", "55%", "experience")} />
+          <MapStop label="Skills" top="48%" left="70%" onClick={() => moveShip("48%", "70%", "skills")} />
+          <MapStop label="Contact" top="60%" left="85%" final onClick={() => moveShip("60%", "85%", "contact")} />
+        </>
+      )}
 
       {/* PANEL */}
       {active && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center">
-          <div className="relative w-[90%] max-w-4xl max-h-[85vh] overflow-y-auto rounded-2xl border border-white/10 bg-[#020617] p-8 shadow-2xl">
+        <div className="fixed inset-0 panel-bg overflow-y-auto z-50">
+          <div className="panel-card mx-auto mt-24 mb-24">
 
             <button
+              className="panel-close"
               onClick={() => setActive(null)}
-              className="absolute top-4 right-5 text-white/60 hover:text-white text-lg"
             >
               ✕
             </button>
 
             {active === "about" && <About />}
             {active === "projects" && <Projects />}
+            {active === "experience" && <Section title="Experience" />}
+            {active === "skills" && <Section title="Skills" />}
+            {active === "contact" && <Section title="Contact" />}
 
-            {active === "skills" && (
-              <>
-                <h1 className="text-3xl font-bold mb-4">Skills</h1>
-                <p className="text-white/70">Add your stack here.</p>
-              </>
-            )}
-
-            {active === "experience" && (
-              <>
-                <h1 className="text-3xl font-bold mb-4">Experience</h1>
-                <p className="text-white/70">Add your experience here.</p>
-              </>
-            )}
-
-            {active === "contact" && (
-              <>
-                <h1 className="text-3xl font-bold mb-4">Contact</h1>
-                <p className="text-white/70">Add email / LinkedIn / resume.</p>
-              </>
-            )}
           </div>
         </div>
       )}
@@ -136,16 +97,28 @@ export default function Home() {
   );
 }
 
-/* MAP DOT */
-function MapStop({ label, style, onClick }) {
+function MapStop({ label, top, left, onClick, final }) {
   return (
     <div
       onClick={onClick}
-      style={style}
-      className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer flex flex-col items-center gap-2"
+      style={{ top, left }}
+      className="map-stop"
     >
-      <div className="w-4 h-4 rounded-full bg-white shadow-[0_0_20px_white]" />
-      <span className="pirate text-sm text-white/90">{label}</span>
+      {final ? (
+        <span className="finish-x">X</span>
+      ) : (
+        <div className="dot" />
+      )}
+      <span className="label pirate">{label}</span>
     </div>
+  );
+}
+
+function Section({ title }) {
+  return (
+    <>
+      <h1 className="section-title">{title}</h1>
+      <p className="section-text">Add your content here.</p>
+    </>
   );
 }
