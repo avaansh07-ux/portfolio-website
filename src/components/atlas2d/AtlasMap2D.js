@@ -118,7 +118,7 @@ export default function AtlasMap2D() {
         </div>
         <div className="atlas-top-ui-actions">
           <button type="button" onClick={() => setActiveRegion(focusedRegion)}>
-            Dock at {focus.short}
+            Dock at {focus.title}
           </button>
           <button type="button" onClick={() => setSoundOn((prev) => !prev)}>
             {soundOn ? "Sound: On" : "Sound: Off"}
@@ -146,9 +146,9 @@ export default function AtlasMap2D() {
         {!activeRegion && (
           <motion.p
             className="atlas-hint"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 8 }}
+            initial={{ opacity: 0, y: 10, x: "-50%" }}
+            animate={{ opacity: 1, y: 0, x: "-50%" }}
+            exit={{ opacity: 0, y: 8, x: "-50%" }}
           >
             Use Arrow Keys to sail, Enter to dock.
           </motion.p>
