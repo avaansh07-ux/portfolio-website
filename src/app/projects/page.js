@@ -30,7 +30,7 @@ export default function Projects() {
         </div>
 
         <a
-          href="https://github.com/avaansh07-ux/Robo-Advising-Portfolio"
+          href="https://github.com/avaansh07-ux/Robo-Advising-Portfolio-Optimizer"
           target="_blank"
           className="inline-flex items-center gap-2 hover:opacity-80"
         >

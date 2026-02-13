@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import About from "./about/page";
 import Projects from "./projects/page";
+import Experiences from "./experiences/page";
+import Skills from "./skills/page";
 
 export default function Home() {
   const [active, setActive] = useState(null);
@@ -46,13 +48,31 @@ export default function Home() {
         />
       )}
 
-      {/* SKULL + CRACKS (ONLY MAIN MAP) */}
+      {/* CLOUDS */}
+<div className="cloud-layer">
+  {[...Array(6)].map((_, i) => (
+    <img
+      key={i}
+      src="/map/cloud.png"
+      className="cloud-drift"
+      style={{
+        top: `${10 + Math.random() * 70}%`,
+        animationDelay: `${i * 8}s`,
+        animationDuration: `${90 + Math.random() * 60}s`,
+      }}
+    />
+  ))}
+</div>
+
+
+
+      {/* SKULL IMPACT */}
       {!active && showSkull && (
-        <>
+        <div className="skull-impact">
           <img src="/icons/skull.png" className="skull" />
           <img src="/icons/cracks.png" className="cracks" />
-        </>
-      )}
+          </div>
+        )}
 
       {/* TITLE */}
       {!active && (
@@ -75,7 +95,7 @@ export default function Home() {
       {/* PANEL */}
       {active && (
         <div className="fixed inset-0 panel-bg overflow-y-auto z-50">
-          <div className="panel-card mx-auto mt-24 mb-24">
+          <div className="panel-card mx-auto mt-24 mb-24 max-w-5xl px-6">
 
             <button
               className="panel-close"
@@ -86,8 +106,8 @@ export default function Home() {
 
             {active === "about" && <About />}
             {active === "projects" && <Projects />}
-            {active === "experience" && <Section title="Experience" />}
-            {active === "skills" && <Section title="Skills" />}
+            {active === "experience" && <Experiences />} 
+            {active === "skills" && <Skills />}
             {active === "contact" && <Section title="Contact" />}
 
           </div>

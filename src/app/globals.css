@@ -36,33 +36,72 @@ body {
   z-index: 20;
 }
 
-/* SKULL */
+/* ================= SKULL IMPACT ================= */
+
 .skull {
   position: absolute;
-  top: 80px;
+  top: -420px;
   right: 80px;
-  width: 200px;
-  opacity: 0.85;
-  z-index: 30;
+  width: 240px;
+  z-index: 9999;
   pointer-events: none;
-  animation: skullDrop 0.8s ease forwards;
+  opacity: 0.95;
+
+  animation: skullFall 0.55s cubic-bezier(.15,.9,.2,1) forwards,
+             skullImpact 0.18s ease 0.55s,
+             skullSettle 0.35s ease 0.73s forwards;
 }
 
-@keyframes skullDrop {
-  from { transform: translateY(-200px); }
-  to { transform: translateY(0); }
+/* FAST FALL */
+@keyframes skullFall {
+  0%   { transform: translateY(0) scale(1); }
+  80%  { transform: translateY(460px) scale(1.08); }
+  100% { transform: translateY(430px) scale(0.95); }
 }
 
-/* CRACKS */
+/* HARD HIT SHAKE */
+@keyframes skullImpact {
+  0% { transform: translateY(430px) translateX(0); }
+  20% { transform: translateY(430px) translateX(-6px); }
+  40% { transform: translateY(430px) translateX(6px); }
+  60% { transform: translateY(430px) translateX(-4px); }
+  80% { transform: translateY(430px) translateX(3px); }
+  100% { transform: translateY(430px) translateX(0); }
+}
+
+/* FINAL REST */
+@keyframes skullSettle {
+  from { transform: translateY(430px) scale(0.95); }
+  to   { transform: translateY(440px) scale(1); }
+}
+
+
+/* ================= CRACK IMPACT — LOCKED TO SKULL ================= */
+
+/* ================= CRACKS ================= */
+
 .cracks {
   position: absolute;
-  top: 120px;
-  right: 60px;
-  width: 260px;
-  opacity: 0.55;
-  z-index: 25;
+  width: 360px;
+
+  /* MOVE THESE TWO VALUES ONLY */
+  right: 10px;   /* horizontal alignment under skull */
+  top: 25px;    /* vertical alignment under skull */
+
+  opacity: 0;
   pointer-events: none;
+  z-index: 9998;
+
+  animation: crackFlash 0.45s ease forwards;
+  animation-delay: 0.55s;
 }
+
+@keyframes crackFlash {
+  0%   { opacity: 0; transform: scale(0.85); }
+  50%  { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 0.9; transform: scale(1); }
+}
+
 
 /* DOTTED PATH */
 .path-line {
@@ -139,3 +178,72 @@ body {
   color: #e5e5e5;
   line-height: 1.7;
 }
+
+/* ===== PROFILE FRAME ===== */
+
+.profile-frame {
+  padding: 8px;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #3a2a14, #8b6a32, #3a2a14);
+  box-shadow:
+    0 0 0 2px rgba(0,0,0,0.6),
+    0 12px 30px rgba(0,0,0,0.5),
+    inset 0 0 25px rgba(255,215,130,0.15);
+  position: relative;
+}
+
+/* subtle old-map texture look */
+.profile-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: url("/map/parchment.jpg");
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.profile-img {
+  width: 280px;
+  height: 360px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  box-shadow: drop-shadow(0 10px 18px rgba(0,0,0,0.6));
+}
+
+/* ================= CLOUD DRIFT ================= */
+
+/* From LEFT → RIGHT */
+.cloud-left {
+  position: absolute;
+  left: -300px;
+  width: 420px;
+  opacity: 0.28;
+  filter: blur(2px);
+  animation: cloudLeft linear infinite;
+}
+
+/* From RIGHT → LEFT */
+.cloud-right {
+  position: absolute;
+  right: -300px;
+  width: 420px;
+  opacity: 0.28;
+  filter: blur(2px);
+  animation: cloudRight linear infinite;
+}
+
+@keyframes cloudLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(140vw); }
+}
+
+@keyframes cloudRight {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-140vw); }
+}
+
+
+
