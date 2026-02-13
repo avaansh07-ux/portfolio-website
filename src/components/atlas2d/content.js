@@ -33,7 +33,7 @@ export const PROJECTS = [
     description:
       "Machine-learning system that analyzes loan performance using structured financial data, predicting risk categories and computes default probability.",
     tech: ["Python", "JavaScript", "CSS", "Flask", "MongoDB", "Chart.js"],
-    link: "https://github.com/avaansh07-ux/credit_risk_loaner",
+    link: "https://github.com/avaansh07-ux/deltahacks26",
   },
   {
     title: "Portfolio Website",
