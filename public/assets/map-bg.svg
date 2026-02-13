@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1100" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="parch" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8e836d"/>
+      <stop offset="50%" stop-color="#766d5c"/>
+      <stop offset="100%" stop-color="#615a4d"/>
+    </linearGradient>
+    <filter id="grain" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.08"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <rect width="1800" height="1100" fill="url(#parch)"/>
+  <rect width="1800" height="1100" filter="url(#grain)"/>
+  <g stroke="#2f2922" stroke-opacity="0.52" fill="none" stroke-width="3">
+    <path d="M80 790C220 700 330 730 420 640C510 550 620 610 690 560"/>
+    <path d="M710 420C790 390 900 450 980 430C1060 410 1160 450 1210 390"/>
+    <path d="M1310 700C1380 650 1490 690 1580 620C1650 570 1710 600 1760 540"/>
+    <path d="M360 180C410 220 430 280 470 330C520 390 610 410 640 480"/>
+  </g>
+  <g fill="#2a241d" fill-opacity="0.35" font-family="serif" font-size="56">
+    <text x="130" y="300">Western Tides</text>
+    <text x="760" y="260">Pirate Passage</text>
+    <text x="1110" y="830">Leeward Expanse</text>
+  </g>
+</svg>
