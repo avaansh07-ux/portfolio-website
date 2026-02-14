@@ -303,6 +303,7 @@ body {
 
 .atlas-top-ui button,
 .atlas-quick-nav button,
+.atlas-mobile-controls button,
 .atlas-panel button,
 .letter-form button {
   border-radius: 999px;
@@ -316,6 +317,7 @@ body {
 
 .atlas-top-ui button:disabled,
 .atlas-quick-nav button:disabled,
+.atlas-mobile-controls button:disabled,
 .atlas-panel button:disabled,
 .letter-form button:disabled {
   opacity: 0.6;
@@ -365,6 +367,23 @@ body {
   backdrop-filter: blur(8px);
   color: var(--ink-dim);
   transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.atlas-mobile-controls {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 22;
+  display: none;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  width: min(320px, calc(100vw - 20px));
+}
+
+.atlas-mobile-controls button {
+  padding: 9px 0;
+  font-size: 0.92rem;
 }
 
 .atlas-panel-overlay {
@@ -667,10 +686,14 @@ body {
   }
 
   .atlas-hint {
-    bottom: 82px;
+    bottom: 78px;
     width: calc(100vw - 24px);
     text-align: center;
     border-radius: 12px;
+  }
+
+  .atlas-mobile-controls {
+    display: grid;
   }
 
   .atlas-panel {

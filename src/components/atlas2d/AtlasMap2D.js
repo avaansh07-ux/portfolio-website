@@ -13,11 +13,24 @@ export default function AtlasMap2D() {
   const [focusedRegion, setFocusedRegion] = useState(REGIONS[0].id);
   const [viewport, setViewport] = useState({ width: 1280, height: 720 });
   const [soundOn, setSoundOn] = useState(true);
+  const [isTouchDevice] = useState(
+    () => typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0),
+  );
   const audioRef = useRef(null);
+  const touchStartRef = useRef(null);
 
   const focus = REGIONS.find((region) => region.id === focusedRegion) ?? REGIONS[0];
   const shipTarget = { x: focus.x, y: focus.y };
   const zoom = activeRegion ? 1.08 : 1;
+
+  const moveFocus = (direction) => {
+    setFocusedRegion((prev) => {
+      const index = REGIONS.findIndex((region) => region.id === prev);
+      const next = (index + direction + REGIONS.length) % REGIONS.length;
+      return REGIONS[next].id;
+    });
+    setActiveRegion(null);
+  };
 
   useEffect(() => {
     const onResize = () => setViewport({ width: window.innerWidth, height: window.innerHeight });
@@ -61,10 +74,10 @@ export default function AtlasMap2D() {
     const onKey = (event) => {
       const index = REGIONS.findIndex((region) => region.id === focusedRegion);
       if (event.key === "ArrowRight" || event.key === "ArrowDown") {
-        setFocusedRegion(REGIONS[(index + 1) % REGIONS.length].id);
+        moveFocus(1);
       }
       if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
-        setFocusedRegion(REGIONS[(index - 1 + REGIONS.length) % REGIONS.length].id);
+        moveFocus(-1);
       }
       if (event.key === "Enter") {
         setActiveRegion(REGIONS[index].id);
@@ -90,7 +103,21 @@ export default function AtlasMap2D() {
   }, [focus, viewport.height, viewport.width]);
 
   return (
-    <main className={`atlas-app ${activeRegion ? "atlas-modal-open" : ""}`}>
+    <main
+      className={`atlas-app ${activeRegion ? "atlas-modal-open" : ""}`}
+      onTouchStart={(event) => {
+        if (!isTouchDevice || activeRegion) return;
+        touchStartRef.current = event.touches[0].clientX;
+      }}
+      onTouchEnd={(event) => {
+        if (!isTouchDevice || activeRegion || touchStartRef.current === null) return;
+        const endX = event.changedTouches[0].clientX;
+        const delta = endX - touchStartRef.current;
+        touchStartRef.current = null;
+        if (Math.abs(delta) < 40) return;
+        moveFocus(delta < 0 ? 1 : -1);
+      }}
+    >
       <div className="atlas-vignette" />
       <motion.div
         className="atlas-world"
@@ -142,6 +169,20 @@ export default function AtlasMap2D() {
         ))}
       </nav>
 
+      {isTouchDevice && !activeRegion && (
+        <div className="atlas-mobile-controls">
+          <button type="button" onClick={() => moveFocus(-1)} aria-label="Sail previous location">
+            Prev
+          </button>
+          <button type="button" onClick={() => setActiveRegion(focusedRegion)} aria-label="Dock at location">
+            Dock
+          </button>
+          <button type="button" onClick={() => moveFocus(1)} aria-label="Sail next location">
+            Next
+          </button>
+        </div>
+      )}
+
       <AnimatePresence>
         {!activeRegion && (
           <motion.p
@@ -150,7 +191,7 @@ export default function AtlasMap2D() {
             animate={{ opacity: 1, y: 0, x: "-50%" }}
             exit={{ opacity: 0, y: 8, x: "-50%" }}
           >
-            Use Arrow Keys to sail, Enter to dock.
+            {isTouchDevice ? "Swipe or use Prev/Next, then tap Dock." : "Use Arrow Keys to sail, Enter to dock."}
           </motion.p>
         )}
       </AnimatePresence>
