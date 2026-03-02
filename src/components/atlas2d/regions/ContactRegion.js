@@ -13,7 +13,7 @@ export default function ContactRegion() {
         <a href="https://github.com/avaansh07-ux" target="_blank" rel="noreferrer">
           github.com/avaansh07-ux
         </a>
-        <a href="https://www.linkedin.com/in/avaanshnanda" target="_blank" rel="noreferrer">
+        <a href="https://www.linkedin.com/in/avaansh-nanda/" target="_blank" rel="noreferrer">
           linkedin.com/in/avaanshnanda
         </a>
       </div>
