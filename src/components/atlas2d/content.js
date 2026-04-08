@@ -31,7 +31,7 @@ export const PROJECTS = [
   {
     title: "PayWise",
     description:
-      "Machine-learning system that analyzes loan performance using structured financial data, predicting risk categories and computes default probability.",
+      "Built a full-stack OSAP repayment simulator modeling interest, RAP eligibility, and income-based scenarios, using MongoDB to store plans and generate anonymous, major-adjusted benchmarking insights.",
     tech: ["Python", "JavaScript", "CSS", "Flask", "MongoDB", "Chart.js"],
     link: "https://github.com/avaansh07-ux/deltahacks26",
   },
