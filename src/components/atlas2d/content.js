@@ -36,6 +36,14 @@ export const PROJECTS = [
     link: "https://github.com/avaansh07-ux/deltahacks26",
   },
   {
+    title: "World-Cup Simulator",
+    description:
+      "A simulation-based 2026 World Cup prediction platform that runs thousands of Monte Carlo tournament simulations to project match outcomes, bracket paths, and each nation’s probability of winning the World Cup.",
+    tech: ["Flask", "React", "Vercel", "Javascript", "CSS"],
+    link: "https://github.com/avaansh07-ux/world-cup-2026-monte-carlo",
+  },
+  
+  {
     title: "Portfolio Website",
     description:
       "Fully-custom personal portfolio built with Next.js, Tailwind, Framer Motion, and deployed with Vercel. Responsive, animated, and optimized for performance.",
