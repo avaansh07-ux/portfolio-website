@@ -15,6 +15,18 @@ export const ABOUT = {
 
 export const PROJECTS = [
   {
+    title: "World Cup 2026 Predictor",
+    description:
+      "Full-stack Monte Carlo simulation web app that predicts the 2026 FIFA World Cup using statistical modeling, player ratings, and match simulations.",
+    bullets: [
+      "Simulates complete tournaments from group stage to final, generating probabilities for champions, knockout advancement, scorelines, and top scorers.",
+      "Built an interactive football-themed interface backed by Flask APIs and Python data analysis workflows.",
+      "Combines tournament logic, rating inputs, and randomized match outcomes to turn complex model results into clear user-facing insights.",
+    ],
+    tech: ["React", "Flask", "Python", "Monte Carlo Simulation", "Data Analysis"],
+    link: "https://world-cup-2026-monte-carlo.vercel.app/",
+  },
+  {
     title: "Portfolio Optimizer",
     description:
       "Built a portfolio optimizer that uses modern portfolio theory and real-time market data to compute optimal weights based on Sharpe, volatility, and return metrics.",
@@ -61,6 +73,17 @@ export const SKILLS = {
 
 export const EXPERIENCES = [
   {
+    image: "/assets/experiences/readywhen.jpg",
+    title: "ReadyWhen Tech",
+    role: "AI Automation and QA Analyst",
+    date: "May 2026 - August 2026",
+    bullets: [
+      "Developed and maintained Playwright automation tests within a 500+ test regression framework covering purchase, sale, refinance, private lending, and Ontario-specific workflows across the GoVeyance platform.",
+      "Executed regression, smoke, and API testing in Agile release cycles, identifying defects, validating fixes, and supporting monthly software deployments through staging and production environments.",
+      "Collaborated with developers to investigate software issues and expand automated test coverage for new features, improving reliability across complex end-to-end real estate transaction workflows.",
+    ],
+  },
+  {
     image: "/assets/experiences/venturex.jpg",
     title: "Venture X",
     role: "Growth Intern",
@@ -83,7 +106,7 @@ export const EXPERIENCES = [
   {
     image: "/assets/experiences/uwmcc.jpg",
     title: "UW Management Consulting Club",
-    role: "Operations Associate",
+    role: "VP of Finance and Operations",
     date: "Jan 2025 - Present",
     bullets: [
       "Coordinated logistics and internal execution for club events while supporting funding pitch preparation.",

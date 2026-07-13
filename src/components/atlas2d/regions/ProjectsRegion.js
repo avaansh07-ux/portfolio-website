@@ -10,6 +10,13 @@ export default function ProjectsRegion() {
           <article key={project.title} className="parchment-card">
             <h3>{project.title}</h3>
             <p>{project.description}</p>
+            {project.bullets && (
+              <ul className="gem-list">
+                {project.bullets.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
+              </ul>
+            )}
             <div className="pill-row">
               {project.tech.map((tech) => (
                 <span key={tech}>{tech}</span>
