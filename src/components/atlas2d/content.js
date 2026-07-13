@@ -18,11 +18,6 @@ export const PROJECTS = [
     title: "World Cup 2026 Predictor",
     description:
       "Full-stack Monte Carlo simulation web app that predicts the 2026 FIFA World Cup using statistical modeling, player ratings, and match simulations.",
-    bullets: [
-      "Simulates complete tournaments from group stage to final, generating probabilities for champions, knockout advancement, scorelines, and top scorers.",
-      "Built an interactive football-themed interface backed by Flask APIs and Python data analysis workflows.",
-      "Combines tournament logic, rating inputs, and randomized match outcomes to turn complex model results into clear user-facing insights.",
-    ],
     tech: ["React", "Flask", "Python", "Monte Carlo Simulation", "Data Analysis"],
     link: "https://world-cup-2026-monte-carlo.vercel.app/",
   },
