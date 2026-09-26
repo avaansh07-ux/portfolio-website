@@ -52,7 +52,7 @@ export const PROJECTS = [
 ];
 
 export const SKILLS = {
-  "Programming Languages": ["Python", "JavaScript", "CSS"],
+  "Programming Languages": ["Python", "JavaScript", "CSS", "C"],
   "Core Frameworks & Tools": ["XGBoost", "SciPy", "React / Next.js", "Pandas / NumPy", "yFinance"],
   "Technical Focus": ["Financial Modeling", "Machine Learning", "Data Science", "Full-Stack Development"],
   "Professional Skills": ["Leadership", "Team Management", "Market Research", "Consulting"],
